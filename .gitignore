@@ -1,0 +1,26 @@
+# Sistem dosyaları (Mac / Windows)
+.DS_Store
+Thumbs.db
+
+# IDE / Editör ayarları
+.vscode/
+.idea/
+*.code-workspace
+
+# Geçici dosyalar
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Ortam değişkenleri (eğer varsa)
+.env
+
+# Çıktı / yedek klasörleri
+output/
+backup/
+
+# Test verileri
+*.csv
+*.json
+
