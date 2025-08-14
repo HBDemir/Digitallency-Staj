@@ -1,0 +1,34 @@
+SELECT SUM(total) AS toplam_fatura
+FROM invoice
+WHERE billing_country = 'USA' 
+AND EXTRACT(YEAR FROM invoice_date) = 2009;
+-- billing_country column u USA ile eşleşen ve
+--invoice_date inin yılı 2009 olan satırlar için true döner ve onları alır.
+-- tüm eşleşen satırların total değerlerini toplar ve toplam_fatura olarak yazar.
+
+SELECT -- göstermek istediğimiz sütunları seçiyoruz
+    t.*,
+    pt.playlist_id,
+    p.name AS playlist_name
+FROM track t
+INNER JOIN playlisttrack pt ON t.track_id = pt.track_id
+INNER JOIN playlist p ON pt.playlist_id = p.playlist_id
+--playlisttrack da zaten join için gerekli koşul verilmiş track id ve playlist id eşleştirmeleri mevcut 
+--bu tabloyu kullanarak track ve playlisti dolaylı yoldan  3. bir relation tablosu(playlisttrack) ile joinliyoruz.
+ORDER BY t.track_id;-- track id ye göre sıralama düzenli gözüksün diye (opsiyonel)
+
+
+
+SELECT -- göstermek istediğimiz sütunları seçiyoruz 
+    t.track_id,
+    t.name AS track_name,
+    t.milliseconds,
+    t.bytes,
+    t.unitprice,
+    al.title AS album_title,
+    ar.name AS artist_name
+FROM track t 
+INNER JOIN album al ON t.album_id = al.album_id --track tablosundaki satırı album tablosundaki satır ile eşliyoruz album id ye göre
+INNER JOIN artist ar ON al.artist_id = ar.artist_id --track tablosundaki satırı artist tablosundaki satır ile eşliyoruz artist id ye göre
+WHERE al.title = 'Let There Be Rock' -- eşlenmiş satırlar arasından album title i 'Let There Be Rock' ile eşleşen satırları alıyoruz.
+ORDER BY t.milliseconds DESC; --azalan sıra ile milisecondsa göre sıralıyoruz.
